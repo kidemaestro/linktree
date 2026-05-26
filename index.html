@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Dejan Dakic — live products, work in progress, and links from my X bio.">
+    <meta name="description" content="Dejan Dakic — live products, what is shipping next, and where to connect.">
     <meta property="og:title" content="Dejan Dakic — projects">
-    <meta property="og:description" content="Live builds, what I am shipping next, and where to connect.">
+    <meta property="og:description" content="Live builds, upcoming launches, and links from my X bio.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kidemaestro.github.io/linktree/">
     <meta property="og:image" content="https://kidemaestro.github.io/linktree/assets/social-card.svg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dejan Dakic — projects">
-    <meta name="twitter:description" content="Live builds, what I am shipping next, and where to connect.">
+    <meta name="twitter:description" content="Live builds, upcoming launches, and links from my X bio.">
     <meta name="twitter:image" content="https://kidemaestro.github.io/linktree/assets/social-card.svg">
     <meta name="theme-color" content="#070b14">
     <link rel="canonical" href="https://kidemaestro.github.io/linktree/">
@@ -20,47 +20,57 @@
     <link rel="stylesheet" href="assets/styles.css">
   </head>
   <body>
-    <a class="skip-link" href="#published-heading">Skip to projects</a>
+    <a class="skip-link" href="#live-section">Skip to projects</a>
     <div class="page-shell">
       <main id="app" class="site" aria-live="polite">
-        <section class="hero panel" aria-labelledby="profile-name">
+        <header class="hero panel" aria-labelledby="profile-name">
           <div class="avatar" id="profile-avatar" aria-hidden="true"></div>
           <p class="eyebrow" id="profile-handle"></p>
           <h1 id="profile-name"></h1>
+          <p class="hero-role" id="profile-role"></p>
           <p class="hero-copy" id="profile-tagline"></p>
-          <ul class="hero-stats" id="hero-stats" aria-label="Project counts"></ul>
+          <ul class="hero-stats" id="hero-stats" aria-label="Project overview"></ul>
+          <nav class="page-nav" id="page-nav" aria-label="Jump to section"></nav>
           <div class="hero-actions" id="hero-actions"></div>
           <p id="profile-changelog" class="hero-changelog" hidden></p>
+        </header>
+
+        <section class="overview panel" id="overview-panel" aria-labelledby="overview-heading">
+          <h2 class="visually-hidden" id="overview-heading">At a glance</h2>
+          <div class="overview-grid" id="overview-grid"></div>
         </section>
 
-        <section class="section-block panel" aria-labelledby="published-heading">
+        <section class="section-block panel" id="live-section" aria-labelledby="published-heading">
           <div class="section-heading">
-            <p class="eyebrow">Live and published</p>
-            <h2 id="published-heading">Projects you can try now</h2>
+            <p class="eyebrow">Shipped</p>
+            <h2 id="published-heading">Live now — try these</h2>
             <p class="section-lede">
-              Shipped products with public links. Start here if you want demos, apps, or live sites.
+              Public products you can open today. Each card links to the site, community, or source.
             </p>
           </div>
           <div id="published-projects" class="project-grid"></div>
         </section>
 
-        <section class="section-block panel" aria-labelledby="ongoing-heading">
+        <section class="section-block panel" id="next-section" aria-labelledby="ongoing-heading">
           <div class="section-heading">
-            <p class="eyebrow">In progress</p>
-            <h2 id="ongoing-heading">Building next</h2>
+            <p class="eyebrow">Roadmap</p>
+            <h2 id="ongoing-heading">What is next</h2>
             <p class="section-lede">
-              Company work, experiments, and things on the roadmap — including research and launches in progress.
+              Grouped by how close each project is to launch — from shipping soon to research and backlog.
             </p>
           </div>
-          <div id="ongoing-projects" class="project-grid"></div>
+          <div id="upcoming-groups" class="project-groups"></div>
         </section>
 
-        <footer class="footer panel">
+        <footer class="footer panel" id="connect">
           <div>
             <p class="footer-label">Connect</p>
             <nav id="social-links" class="social-links" aria-label="Social links"></nav>
           </div>
-          <p id="last-updated" class="last-updated"></p>
+          <div class="footer-meta">
+            <nav id="meta-links" class="meta-links" aria-label="Page meta links"></nav>
+            <p id="last-updated" class="last-updated"></p>
+          </div>
         </footer>
       </main>
     </div>

@@ -12,16 +12,18 @@ Edit `data/site.js` to change:
 
 - Profile name, handle, initials, tagline, and CTA links
 - Published projects that people can try now
-- Ongoing projects that show what you are building
+- Upcoming projects grouped by stage (`shipping`, `building`, `research`, `company`, `backlog`)
 - Social links and the `lastUpdated` date
 
 Each project supports:
 
 - `title`
+- `summary` (one-line hook shown on the card)
 - `status`
 - `description`
 - `tags`
 - `links`
+- `group` (for upcoming projects only)
 
 ## Preview Locally
 
