@@ -4,7 +4,7 @@ window.SiteConfig = {
     handle: "@DakicDejan",
     initials: "DD",
     changelog:
-      "Updated 30 Apr 2026: social preview URLs point at the GitHub Pages host, BountyRaiders Discord uses a public invite, and the lists below reflect what is live vs in progress.",
+      "Updated 30 Apr 2026: added Pre-Post Flow paper trader (Polymarket + Trump-post research) to the in-progress list.",
     tagline:
       "I build AI and web products on the side. Day to day I run StratA Talent, a boutique executive search firm. Here is what is live, what is shipping soon, and where to follow along.",
     primaryCta: {
@@ -66,6 +66,16 @@ window.SiteConfig = {
         links: [{ label: "Website", url: "https://stratatalent.com" }],
       },
       {
+        title: "Pre-Post Flow Paper Trader",
+        status: "Research",
+        description:
+          "Python research bot: tracks large Polymarket flow in the hours before Trump posts, maps themes, and runs simulated broker-style paper trades with Telegram alerts. Paper capital only — no live-money trading.",
+        tags: ["Python", "Polymarket", "Paper trading"],
+        links: [
+          { label: "Source", url: "https://github.com/kidemaestro/trejding" },
+        ],
+      },
+      {
         title: "GlitzGlow",
         status: "Shipping soon",
         description:
@@ -96,9 +106,9 @@ window.SiteConfig = {
       },
       {
         title: "This project hub",
-        status: "Polishing",
+        status: "Live",
         description:
-          "Static Linktree-style page for my X bio, hosted on GitHub Pages once pushed.",
+          "Static Linktree-style page for my X bio, hosted on GitHub Pages.",
         tags: ["GitHub Pages", "Static"],
         links: [
           { label: "Source", url: "https://github.com/kidemaestro/linktree" },
