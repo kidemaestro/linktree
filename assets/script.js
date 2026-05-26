@@ -104,6 +104,70 @@
       /open site|website|source|instagram/i.test(link.label),
     ) || project.links?.[0];
 
+  const linkMetaLabel = (url, fallbackLabel) => {
+    try {
+      const host = new URL(url).hostname.replace(/^www\./, "");
+      return host;
+    } catch {
+      return fallbackLabel || url;
+    }
+  };
+
+  const createOverviewItem = (project, options = {}) => {
+    const item = createElement("li", "overview-list__item");
+    const link = primaryLink(project);
+
+    if (!link || options.titleOnly) {
+      item.textContent = project.title;
+      return item;
+    }
+
+    if (options.titleOnlyWhenNoPublicLink && /updates on x/i.test(link.label)) {
+      item.textContent = project.title;
+      return item;
+    }
+
+    const anchor = document.createElement("a");
+    anchor.className = "overview-link";
+    anchor.href = link.url;
+    anchor.rel = "noopener noreferrer";
+    anchor.target = "_blank";
+    anchor.setAttribute(
+      "aria-label",
+      `Open ${project.title} — ${linkMetaLabel(link.url, link.label)} (opens in a new tab)`,
+    );
+
+    anchor.append(
+      createElement("span", "overview-link__title", project.title),
+      createElement(
+        "span",
+        "overview-link__meta",
+        options.metaLabel || linkMetaLabel(link.url, link.label),
+      ),
+    );
+    item.append(anchor);
+    return item;
+  };
+
+  const createSocialOverviewItem = (link) => {
+    const item = createElement("li", "overview-list__item");
+    const anchor = document.createElement("a");
+    anchor.className = "overview-link";
+    anchor.href = link.url;
+    anchor.rel = "noopener noreferrer";
+    anchor.target = "_blank";
+    anchor.setAttribute(
+      "aria-label",
+      `${link.label} (opens in a new tab)`,
+    );
+    anchor.append(
+      createElement("span", "overview-link__title", link.label),
+      createElement("span", "overview-link__meta", linkMetaLabel(link.url, link.label)),
+    );
+    item.append(anchor);
+    return item;
+  };
+
   const renderAvatar = (profile) => {
     const avatar = document.getElementById("profile-avatar");
     avatar.replaceChildren();
@@ -205,14 +269,7 @@
     );
     const liveList = createElement("ul", "overview-list");
     for (const project of config.sections.published) {
-      const item = createElement("li", "overview-list__item");
-      const link = primaryLink(project);
-      if (link) {
-        item.append(createLink(link, "overview-link", { hideIcon: true }));
-      } else {
-        item.textContent = project.title;
-      }
-      liveList.append(item);
+      liveList.append(createOverviewItem(project));
     }
     liveColumn.append(liveList);
 
@@ -222,16 +279,17 @@
     );
     const nextList = createElement("ul", "overview-list");
     for (const project of config.sections.upcoming.filter((entry) =>
-      ["shipping", "building", "research"].includes(entry.group),
+      ["building", "research"].includes(entry.group),
     )) {
-      const item = createElement("li", "overview-list__item");
-      const link = primaryLink(project);
-      if (link && !/updates on x/i.test(link.label)) {
-        item.append(createLink(link, "overview-link", { hideIcon: true }));
-      } else {
-        item.textContent = project.title;
-      }
-      nextList.append(item);
+      nextList.append(
+        createOverviewItem(project, {
+          titleOnlyWhenNoPublicLink: true,
+          metaLabel:
+            project.links?.[0]?.label === "Source"
+              ? "GitHub"
+              : linkMetaLabel(project.links?.[0]?.url || "", project.links?.[0]?.label),
+        }),
+      );
     }
     nextColumn.append(nextList);
 
@@ -241,9 +299,7 @@
     );
     const connectList = createElement("ul", "overview-list");
     for (const link of config.socialLinks) {
-      const item = createElement("li", "overview-list__item");
-      item.append(createLink(link, "overview-link", { hideIcon: true }));
-      connectList.append(item);
+      connectList.append(createSocialOverviewItem(link));
     }
     connectColumn.append(connectList);
 

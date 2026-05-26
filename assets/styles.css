@@ -357,21 +357,33 @@ h3 {
 }
 
 .overview-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.25rem;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  min-height: 2.5rem;
+  padding: 0.35rem 0;
   color: var(--text);
-  font-size: 0.9rem;
-  font-weight: 600;
   text-decoration: none;
 }
 
-.overview-link:hover,
-.overview-link:focus-visible {
+.overview-link:hover .overview-link__title,
+.overview-link:focus-visible .overview-link__title {
   color: var(--accent);
-  outline: none;
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+}
+
+.overview-link__title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.overview-link__meta {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .button,

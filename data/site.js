@@ -6,7 +6,7 @@ window.SiteConfig = {
     role: "Founder · product builder · executive search",
     initials: "DD",
     avatarUrl: "assets/profile.jpg",
-    changelog: "Latest: profile photo and hero polish.",
+    changelog: "Latest: clearer Try now labels and GlitzGlow marked live.",
     tagline:
       "I ship AI and web products on the side. Full time I run StratA Talent, a boutique executive search firm.",
     primaryCta: {
@@ -57,20 +57,20 @@ window.SiteConfig = {
           },
         ],
       },
-    ],
-    upcoming: [
       {
-        group: "shipping",
         title: "GlitzGlow",
-        status: "Shipping soon",
+        status: "Live",
         summary: "E-commerce storefront for semi-cured gel nails.",
         description:
-          "Next.js shop with catalog, checkout, admin, and launch prep. Public site goes live soon.",
+          "Shop semi-cured gel nails with catalog, checkout, and a lightweight admin back office.",
         tags: ["Next.js", "E-commerce"],
         links: [
+          { label: "Open site", url: "https://www.glitzglow.ae" },
           { label: "Instagram", url: "https://www.instagram.com/glitzglowuae/" },
         ],
       },
+    ],
+    upcoming: [
       {
         group: "building",
         title: "AI Recruitment Assistant",
