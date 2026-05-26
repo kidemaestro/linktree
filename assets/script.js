@@ -104,10 +104,37 @@
       /open site|website|source|instagram/i.test(link.label),
     ) || project.links?.[0];
 
+  const renderAvatar = (profile) => {
+    const avatar = document.getElementById("profile-avatar");
+    avatar.replaceChildren();
+
+    if (!profile.avatarUrl) {
+      avatar.textContent = profile.initials;
+      avatar.classList.remove("avatar--photo");
+      return;
+    }
+
+    const image = document.createElement("img");
+    image.className = "avatar__image";
+    image.src = profile.avatarUrl;
+    image.alt = profile.name;
+    image.width = 80;
+    image.height = 80;
+    image.decoding = "async";
+    image.loading = "eager";
+    image.addEventListener("error", () => {
+      avatar.classList.remove("avatar--photo");
+      avatar.textContent = profile.initials;
+    });
+
+    avatar.classList.add("avatar--photo");
+    avatar.append(image);
+  };
+
   const renderProfile = () => {
     const { profile } = config;
 
-    document.getElementById("profile-avatar").textContent = profile.initials;
+    renderAvatar(profile);
     document.getElementById("profile-name").textContent = profile.name;
     document.getElementById("profile-role").textContent = profile.role || "";
     document.getElementById("profile-tagline").textContent = profile.tagline;

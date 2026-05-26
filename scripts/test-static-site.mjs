@@ -48,6 +48,12 @@ vm.runInNewContext(read("data/site.js"), dataContext);
 const site = dataContext.window.SiteConfig;
 assert.ok(site.profile.name, "profile name should be editable");
 assert.ok(site.profile.handle, "profile handle should be editable");
+assert.ok(site.profile.initials, "profile initials should be editable for avatar fallback");
+assert.ok(site.profile.avatarUrl, "profile avatarUrl should point at bundled photo");
+assert.ok(
+  fs.existsSync(path.join(root, "assets/profile.jpg")),
+  "profile photo should be bundled for the hero avatar",
+);
 assert.ok(site.profile.primaryCta.url, "primary CTA should have a URL");
 assert.ok(site.sections.published.length >= 2, "published projects should include examples");
 assert.ok(site.sections.upcoming.length >= 2, "upcoming projects should include examples");

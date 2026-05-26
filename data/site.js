@@ -5,7 +5,8 @@ window.SiteConfig = {
     handleUrl: "https://x.com/DakicDejan",
     role: "Founder · product builder · executive search",
     initials: "DD",
-    changelog: "Latest: clearer live vs upcoming layout and project summaries.",
+    avatarUrl: "assets/profile.jpg",
+    changelog: "Latest: profile photo and hero polish.",
     tagline:
       "I ship AI and web products on the side. Full time I run StratA Talent, a boutique executive search firm.",
     primaryCta: {
