@@ -4,9 +4,9 @@ window.SiteConfig = {
     handle: "@DakicDejan",
     initials: "DD",
     changelog:
-      "Updated 30 Apr 2026: added Pre-Post Flow paper trader (Polymarket + Trump-post research) to the in-progress list.",
+      "Latest: Pre-Post Flow paper trader added to the in-progress list.",
     tagline:
-      "I build AI and web products on the side. Day to day I run StratA Talent, a boutique executive search firm. Here is what is live, what is shipping soon, and where to follow along.",
+      "I build AI and web products on the side. Day to day I run StratA Talent, a boutique executive search firm.",
     primaryCta: {
       label: "Follow on X",
       url: "https://x.com/DakicDejan",

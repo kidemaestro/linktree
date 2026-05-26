@@ -13,42 +13,53 @@
     <meta name="twitter:title" content="Dejan Dakic — projects">
     <meta name="twitter:description" content="Live builds, what I am shipping next, and where to connect.">
     <meta name="twitter:image" content="https://kidemaestro.github.io/linktree/assets/social-card.svg">
-    <meta name="theme-color" content="#101623">
+    <meta name="theme-color" content="#070b14">
     <link rel="canonical" href="https://kidemaestro.github.io/linktree/">
     <title>Dejan Dakic — projects</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#published-heading">Skip to projects</a>
     <div class="page-shell">
       <main id="app" class="site" aria-live="polite">
-        <section class="hero" aria-labelledby="profile-name">
+        <section class="hero panel" aria-labelledby="profile-name">
           <div class="avatar" id="profile-avatar" aria-hidden="true"></div>
           <p class="eyebrow" id="profile-handle"></p>
           <h1 id="profile-name"></h1>
           <p class="hero-copy" id="profile-tagline"></p>
+          <ul class="hero-stats" id="hero-stats" aria-label="Project counts"></ul>
           <div class="hero-actions" id="hero-actions"></div>
           <p id="profile-changelog" class="hero-changelog" hidden></p>
         </section>
 
-        <section class="section-block" aria-labelledby="published-heading">
+        <section class="section-block panel" aria-labelledby="published-heading">
           <div class="section-heading">
             <p class="eyebrow">Live and published</p>
-            <h2 id="published-heading">Projects people can try now</h2>
+            <h2 id="published-heading">Projects you can try now</h2>
+            <p class="section-lede">
+              Shipped products with public links. Start here if you want demos, apps, or live sites.
+            </p>
           </div>
           <div id="published-projects" class="project-grid"></div>
         </section>
 
-        <section class="section-block" aria-labelledby="ongoing-heading">
+        <section class="section-block panel" aria-labelledby="ongoing-heading">
           <div class="section-heading">
             <p class="eyebrow">In progress</p>
-            <h2 id="ongoing-heading">Ongoing projects and experiments</h2>
+            <h2 id="ongoing-heading">Building next</h2>
+            <p class="section-lede">
+              Company work, experiments, and things on the roadmap — including research and launches in progress.
+            </p>
           </div>
           <div id="ongoing-projects" class="project-grid"></div>
         </section>
 
-        <footer class="footer">
-          <nav id="social-links" class="social-links" aria-label="Social links"></nav>
+        <footer class="footer panel">
+          <div>
+            <p class="footer-label">Connect</p>
+            <nav id="social-links" class="social-links" aria-label="Social links"></nav>
+          </div>
           <p id="last-updated" class="last-updated"></p>
         </footer>
       </main>
