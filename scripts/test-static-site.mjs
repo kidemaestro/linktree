@@ -57,8 +57,8 @@ for (const project of [...site.sections.published, ...site.sections.upcoming]) {
   assert.ok(project.title, "project should have a title");
   assert.ok(project.summary, `${project.title} should have a summary`);
   assert.ok(project.description, `${project.title} should have a description`);
-  assert.ok(project.status, `${project.title} should have a status");
-  assert.ok(Array.isArray(project.links), `${project.title} links should be an array");
+  assert.ok(project.status, `${project.title} should have a status`);
+  assert.ok(Array.isArray(project.links), `${project.title} links should be an array`);
 }
 
 const script = read("assets/script.js");
