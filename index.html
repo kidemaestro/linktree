@@ -3,28 +3,31 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Dejan Dakic — live products, what is shipping next, and where to connect.">
+    <meta name="description" content="Dejan Dakic — live AI and web products, StratA Talent, and what ships next.">
     <meta property="og:title" content="Dejan Dakic — projects">
-    <meta property="og:description" content="Live builds, upcoming launches, and links from my X bio.">
+    <meta property="og:description" content="BountyRaiders, useToolCraft, BetWithBat, and the roadmap behind them.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kidemaestro.github.io/linktree/">
     <meta property="og:image" content="https://kidemaestro.github.io/linktree/assets/social-card.svg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dejan Dakic — projects">
-    <meta name="twitter:description" content="Live builds, upcoming launches, and links from my X bio.">
+    <meta name="twitter:description" content="BountyRaiders, useToolCraft, BetWithBat, and the roadmap behind them.">
     <meta name="twitter:image" content="https://kidemaestro.github.io/linktree/assets/social-card.svg">
     <meta name="theme-color" content="#070b14">
     <link rel="canonical" href="https://kidemaestro.github.io/linktree/">
     <title>Dejan Dakic — projects</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preload" as="image" href="assets/profile.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css">
   </head>
   <body>
     <a class="skip-link" href="#live-section">Skip to projects</a>
     <div class="page-shell">
       <main id="app" class="site" aria-live="polite">
-        <header class="hero panel" aria-labelledby="profile-name">
+        <header class="hero panel reveal" aria-labelledby="profile-name">
           <div class="avatar" id="profile-avatar" aria-hidden="true"></div>
           <p class="eyebrow" id="profile-handle"></p>
           <h1 id="profile-name"></h1>
@@ -36,34 +39,34 @@
           <p id="profile-changelog" class="hero-changelog" hidden></p>
         </header>
 
-        <section class="overview panel" id="overview-panel" aria-labelledby="overview-heading">
+        <section class="overview panel reveal" id="overview-panel" aria-labelledby="overview-heading">
           <h2 class="visually-hidden" id="overview-heading">At a glance</h2>
           <div class="overview-grid" id="overview-grid"></div>
         </section>
 
-        <section class="section-block panel" id="live-section" aria-labelledby="published-heading">
+        <section class="section-block panel reveal" id="live-section" aria-labelledby="published-heading">
           <div class="section-heading">
             <p class="eyebrow">Shipped</p>
             <h2 id="published-heading">Live now — try these</h2>
             <p class="section-lede">
-              Public products you can open today. Each card links to the site, community, or source.
+              Public products you can open today. Each card links to the product, community, or guide.
             </p>
           </div>
           <div id="published-projects" class="project-grid"></div>
         </section>
 
-        <section class="section-block panel" id="next-section" aria-labelledby="ongoing-heading">
+        <section class="section-block panel reveal" id="next-section" aria-labelledby="ongoing-heading">
           <div class="section-heading">
             <p class="eyebrow">Roadmap</p>
             <h2 id="ongoing-heading">What is next</h2>
             <p class="section-lede">
-              Grouped by how close each project is to launch — from shipping soon to research and backlog.
+              Grouped by how close each project is to launch — from active builds to research and backlog.
             </p>
           </div>
           <div id="upcoming-groups" class="project-groups"></div>
         </section>
 
-        <footer class="footer panel" id="connect">
+        <footer class="footer panel reveal" id="connect">
           <div>
             <p class="footer-label">Connect</p>
             <nav id="social-links" class="social-links" aria-label="Social links"></nav>

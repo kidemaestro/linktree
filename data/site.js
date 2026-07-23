@@ -3,12 +3,13 @@ window.SiteConfig = {
     name: "Dejan Dakic",
     handle: "@DakicDejan",
     handleUrl: "https://x.com/DakicDejan",
-    role: "Founder · product builder · executive search",
+    role: "Founder · AI product builder · executive search",
     initials: "DD",
     avatarUrl: "assets/profile.jpg",
-    changelog: "Latest: clearer Try now labels and GlitzGlow marked live.",
+    changelog:
+      "Latest: product stories refreshed from live sites, dead links removed, GlitzGlow shop via Instagram while the storefront is offline.",
     tagline:
-      "I ship AI and web products on the side. Full time I run StratA Talent, a boutique executive search firm.",
+      "I ship AI and web products on the side. Full time I run StratA Talent — boutique executive search for private banking and wealth management.",
     primaryCta: {
       label: "Follow on X",
       url: "https://x.com/DakicDejan",
@@ -23,49 +24,50 @@ window.SiteConfig = {
       {
         title: "BountyRaiders",
         status: "Live",
-        summary: "Bounty marketplace for the ARC Raiders community.",
+        summary: "ARC Raiders bounty board — post targets, hunt, get paid with proof.",
         description:
-          "Create bounties, submit claims, handle payouts, and moderate activity with Discord-backed workflows.",
-        tags: ["Next.js", "Stripe", "Discord"],
+          "Community bounty system for ARC Raiders: post real-money contracts on griefers and campers, claim from the most-wanted list, submit kill proof, and get mod-reviewed payouts via Discord.",
+        tags: ["Next.js", "Stripe", "Discord", "Gaming"],
         links: [
           { label: "Open site", url: "https://www.bountyraiders.com" },
           { label: "Discord", url: "https://discord.gg/XFH6Psv9" },
-          { label: "Source", url: "https://github.com/kidemaestro/bounty-raiders" },
         ],
-      },
-      {
-        title: "BetWithBat",
-        status: "Live",
-        summary: "Sports betting product site built for clarity and conversion.",
-        description:
-          "Public-facing product experience with pricing, onboarding, and flows tuned for trust and speed.",
-        tags: ["Next.js", "Web"],
-        links: [{ label: "Open site", url: "https://betwithbat.com" }],
       },
       {
         title: "useToolCraft",
         status: "Live",
-        summary: "Plain-English AI software finder for operators and small teams.",
+        summary: "AI tool finder for solopreneurs — shortlists that survive production.",
         description:
-          "Describe what you need, get a short vetted shortlist, and follow step-by-step implementation guidance in about 30 seconds.",
+          "Describe a workflow and get a vetted shortlist from 210+ operator-scored tools, with budget and skill matching, Stack Builder cost estimates, and step-by-step setup guidance in about 30 seconds.",
         tags: ["AI", "SaaS", "Discovery"],
         links: [
           { label: "Open site", url: "https://www.usetoolcraft.com" },
           {
-            label: "How we evaluate tools",
+            label: "2026 AI tools guide",
             url: "https://www.usetoolcraft.com/how-to-find-ai-tools",
           },
         ],
       },
       {
+        title: "BetWithBat",
+        status: "Live",
+        summary: "AI-assisted football picks with verified results and transparent reasoning.",
+        description:
+          "Multi-bookmaker odds consensus, injury and lineup intel, and AI edge detection across Europe’s top leagues — picks published about 60 minutes before kickoff with a public performance track record.",
+        tags: ["AI", "Football", "SaaS"],
+        links: [
+          { label: "Open site", url: "https://betwithbat.com" },
+          { label: "Performance", url: "https://betwithbat.com/performance" },
+        ],
+      },
+      {
         title: "GlitzGlow",
         status: "Live",
-        summary: "E-commerce storefront for semi-cured gel nails.",
+        summary: "Semi-cured gel nails brand — shop and updates on Instagram.",
         description:
-          "Shop semi-cured gel nails with catalog, checkout, and a lightweight admin back office.",
-        tags: ["Next.js", "E-commerce"],
+          "UAE beauty brand for semi-cured gel nails. The storefront domain is offline right now; catalog and orders are handled through Instagram while the shop is being refreshed.",
+        tags: ["E-commerce", "Beauty", "UAE"],
         links: [
-          { label: "Open site", url: "https://www.glitzglow.ae" },
           { label: "Instagram", url: "https://www.instagram.com/glitzglowuae/" },
         ],
       },
@@ -75,10 +77,10 @@ window.SiteConfig = {
         group: "building",
         title: "AI Recruitment Assistant",
         status: "In development",
-        summary: "Internal AI tooling for recruitment workflows.",
+        summary: "Internal AI tooling for StratA search workflows.",
         description:
-          "Early builds for search, screening, and workflow support. Not public yet — updates on X for now.",
-        tags: ["AI", "Recruiting"],
+          "Private builds for search, screening, and recruiter workflow support inside StratA. Not public yet — progress notes land on X.",
+        tags: ["AI", "Recruiting", "Internal"],
         links: [{ label: "Updates on X", url: "https://x.com/DakicDejan" }],
       },
       {
@@ -87,18 +89,18 @@ window.SiteConfig = {
         status: "Research",
         summary: "Polymarket flow research tied to Trump-post themes.",
         description:
-          "Python bot that tracks large Polymarket flow before posts, maps themes, and runs paper trades with Telegram alerts. No live money.",
+          "Python bot that watches large Polymarket flow before posts, maps themes, and runs paper trades with Telegram alerts. Research only — no live money.",
         tags: ["Python", "Polymarket", "Paper trading"],
-        links: [{ label: "Source", url: "https://github.com/kidemaestro/trejding" }],
+        links: [{ label: "Updates on X", url: "https://x.com/DakicDejan" }],
       },
       {
         group: "company",
         title: "StratA Talent",
         status: "Day-to-day",
-        summary: "Boutique executive search — my main company work.",
+        summary: "Boutique executive search for private banking and wealth management.",
         description:
-          "Founder and managing director. Separate from the side projects above, but central to what I do week to week.",
-        tags: ["Executive search", "Company"],
+          "Founder and managing director. Independent Dubai-based firm placing senior talent across GCC and Swiss hubs for private banks, investment banks, and boutique wealth managers.",
+        tags: ["Executive search", "Private banking", "Company"],
         links: [{ label: "Website", url: "https://stratatalent.com" }],
       },
       {
@@ -107,7 +109,7 @@ window.SiteConfig = {
         status: "On hold",
         summary: "Family-friendly animated drawings app (Expo).",
         description:
-          "Side project on the back burner while launches and research take priority.",
+          "Side project on the back burner while live launches and StratA work take priority.",
         tags: ["Expo", "React Native"],
         links: [{ label: "Updates on X", url: "https://x.com/DakicDejan" }],
       },
@@ -121,5 +123,5 @@ window.SiteConfig = {
     { label: "GitHub", url: "https://github.com/kidemaestro" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/dejandakic/" },
   ],
-  lastUpdated: "2026-04-30",
+  lastUpdated: "2026-07-23",
 };
