@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Dejan Dakic — projects">
-  <rect width="1200" height="630" fill="#0b1020"/>
+  <rect width="1200" height="630" fill="#070b14"/>
   <circle cx="180" cy="110" r="280" fill="#7dd3fc" opacity=".25"/>
-  <circle cx="1030" cy="620" r="340" fill="#6366f1" opacity=".22"/>
+  <circle cx="1030" cy="620" r="340" fill="#38bdf8" opacity=".18"/>
   <rect x="110" y="90" width="980" height="450" rx="48" fill="#ffffff" opacity=".08" stroke="#ffffff" stroke-opacity=".18"/>
-  <text x="160" y="245" fill="#7dd3fc" font-family="Arial, sans-serif" font-size="38" font-weight="700" letter-spacing="8">BUILDER PORTFOLIO</text>
+  <text x="160" y="245" fill="#7dd3fc" font-family="Arial, sans-serif" font-size="38" font-weight="700" letter-spacing="8">LIVE PRODUCTS</text>
   <text x="160" y="340" fill="#f7f8fb" font-family="Arial, sans-serif" font-size="74" font-weight="800">Dejan Dakic</text>
-  <text x="160" y="420" fill="#aeb7ca" font-family="Arial, sans-serif" font-size="38">Live products · what is next · links</text>
+  <text x="160" y="420" fill="#aeb7ca" font-family="Arial, sans-serif" font-size="34">BountyRaiders · useToolCraft · BetWithBat</text>
 </svg>

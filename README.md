@@ -10,10 +10,12 @@ If you rename the GitHub repo or use a custom domain, update the canonical and O
 
 Edit `data/site.js` to change:
 
-- Profile name, handle, initials, tagline, and CTA links
+- Profile name, handle, initials, tagline, changelog, and CTA links
 - Published projects that people can try now
 - Upcoming projects grouped by stage (`shipping`, `building`, `research`, `company`, `backlog`)
 - Social links and the `lastUpdated` date
+
+Keep summaries short and pull copy from the live product pages when those change. Prefer public product/community links over private GitHub repos.
 
 Each project supports:
 

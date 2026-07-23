@@ -101,7 +101,7 @@
 
   const primaryLink = (project) =>
     (project.links || []).find((link) =>
-      /open site|website|source|instagram/i.test(link.label),
+      /open site|website|try now|instagram|performance|source/i.test(link.label),
     ) || project.links?.[0];
 
   const linkMetaLabel = (url, fallbackLabel) => {
@@ -306,9 +306,10 @@
     grid.replaceChildren(liveColumn, nextColumn, connectColumn);
   };
 
-  const renderProjectCard = (project) => {
+  const renderProjectCard = (project, index = 0) => {
     const card = createElement("article", "project-card");
     card.dataset.stage = project.group || "live";
+    card.style.setProperty("--card-delay", `${Math.min(index, 6) * 45}ms`);
 
     const header = createElement("div", "project-card-header");
     const titleRow = createElement("div", "project-card-title-row");
@@ -330,9 +331,9 @@
       tags.append(createElement("span", "tag", tag));
     }
 
-    for (const [index, link] of (project.links || []).entries()) {
+    for (const [linkIndex, link] of (project.links || []).entries()) {
       const className =
-        index === 0 ? "text-link text-link--primary" : "text-link";
+        linkIndex === 0 ? "text-link text-link--primary" : "text-link";
       links.append(createLink(link, className));
     }
 
@@ -343,7 +344,9 @@
   const renderLiveSection = () => {
     const container = document.getElementById("published-projects");
     container.replaceChildren(
-      ...config.sections.published.map(renderProjectCard),
+      ...config.sections.published.map((project, index) =>
+        renderProjectCard(project, index),
+      ),
     );
   };
 
@@ -370,7 +373,9 @@
       groupHeader.querySelector(".project-group-title").id = `group-${group.key}`;
 
       const grid = createElement("div", "project-grid");
-      grid.replaceChildren(...projects.map(renderProjectCard));
+      grid.replaceChildren(
+        ...projects.map((project, index) => renderProjectCard(project, index)),
+      );
 
       wrapper.append(groupHeader, grid);
       groups.push(wrapper);
