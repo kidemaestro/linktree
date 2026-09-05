@@ -3,16 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Dejan Dakic — live AI and web products, StratA Talent, and what ships next.">
+    <meta name="description" content="Dejan Dakic — live AI and web products, what is in progress, and StratA Talent executive search.">
     <meta property="og:title" content="Dejan Dakic — projects">
-    <meta property="og:description" content="BountyRaiders, useToolCraft, BetWithBat, and the roadmap behind them.">
+    <meta property="og:description" content="BountyRaiders, useToolCraft, BetWithBat, GlitzGlow — and what is being built next.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kidemaestro.github.io/linktree/">
     <meta property="og:image" content="https://kidemaestro.github.io/linktree/assets/social-card.svg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dejan Dakic — projects">
-    <meta name="twitter:description" content="BountyRaiders, useToolCraft, BetWithBat, and the roadmap behind them.">
-    <meta name="twitter:image" content="https://kidemaestro.github.io/linktree/assets/social-card.svg">
+    <meta name="twitter:description" content="BountyRaiders, useToolCraft, BetWithBat, GlitzGlow — and what is being built next.">
     <meta name="theme-color" content="#070b14">
     <link rel="canonical" href="https://kidemaestro.github.io/linktree/">
     <title>Dejan Dakic — projects</title>
@@ -24,60 +23,68 @@
     <link rel="stylesheet" href="assets/styles.css">
   </head>
   <body>
-    <a class="skip-link" href="#live-section">Skip to projects</a>
-    <div class="page-shell">
-      <main id="app" class="site" aria-live="polite">
-        <header class="hero panel reveal" aria-labelledby="profile-name">
-          <div class="avatar" id="profile-avatar" aria-hidden="true"></div>
-          <p class="eyebrow" id="profile-handle"></p>
-          <h1 id="profile-name"></h1>
-          <p class="hero-role" id="profile-role"></p>
-          <p class="hero-copy" id="profile-tagline"></p>
-          <ul class="hero-stats" id="hero-stats" aria-label="Project overview"></ul>
-          <nav class="page-nav" id="page-nav" aria-label="Jump to section"></nav>
-          <div class="hero-actions" id="hero-actions"></div>
-          <p id="profile-changelog" class="hero-changelog" hidden></p>
-        </header>
+    <a class="skip-link" href="#live">Skip to live products</a>
 
-        <section class="overview panel reveal" id="overview-panel" aria-labelledby="overview-heading">
-          <h2 class="visually-hidden" id="overview-heading">At a glance</h2>
-          <div class="overview-grid" id="overview-grid"></div>
+    <div id="app" class="shell">
+      <header class="hero">
+        <div class="avatar" id="profile-avatar" aria-hidden="true"></div>
+        <h1 id="profile-name"></h1>
+        <p class="hero__handle" id="profile-handle"></p>
+        <p class="hero__role" id="profile-role"></p>
+        <p class="hero__tagline" id="profile-tagline"></p>
+        <div class="hero__actions" id="profile-actions"></div>
+        <p class="hero__note" id="profile-note" hidden></p>
+      </header>
+
+      <main>
+        <section class="section" id="live" aria-labelledby="live-heading">
+          <div class="section__head">
+            <h2 id="live-heading">Live now</h2>
+            <span class="count" id="live-count"></span>
+          </div>
+          <p class="section__lede">Open and use these today.</p>
+          <ul class="cards" id="live-list"></ul>
         </section>
 
-        <section class="section-block panel reveal" id="live-section" aria-labelledby="published-heading">
-          <div class="section-heading">
-            <p class="eyebrow">Shipped</p>
-            <h2 id="published-heading">Live now — try these</h2>
-            <p class="section-lede">
-              Public products you can open today. Each card links to the product, community, or guide.
-            </p>
+        <section class="section" id="next" aria-labelledby="next-heading">
+          <div class="section__head">
+            <h2 id="next-heading">In progress</h2>
+            <span class="count" id="next-count"></span>
           </div>
-          <div id="published-projects" class="project-grid"></div>
+          <p class="section__lede">Not public yet — here so you know what is coming.</p>
+          <ul class="queue" id="next-list"></ul>
+          <p class="section__note" id="next-note"></p>
         </section>
 
-        <section class="section-block panel reveal" id="next-section" aria-labelledby="ongoing-heading">
-          <div class="section-heading">
-            <p class="eyebrow">Roadmap</p>
-            <h2 id="ongoing-heading">What is next</h2>
-            <p class="section-lede">
-              Grouped by how close each project is to launch — from active builds to research and backlog.
-            </p>
+        <section class="section" id="work" aria-labelledby="work-heading">
+          <div class="section__head">
+            <h2 id="work-heading">Day job</h2>
           </div>
-          <div id="upcoming-groups" class="project-groups"></div>
+          <div class="work" id="work-card"></div>
         </section>
-
-        <footer class="footer panel reveal" id="connect">
-          <div>
-            <p class="footer-label">Connect</p>
-            <nav id="social-links" class="social-links" aria-label="Social links"></nav>
-          </div>
-          <div class="footer-meta">
-            <nav id="meta-links" class="meta-links" aria-label="Page meta links"></nav>
-            <p id="last-updated" class="last-updated"></p>
-          </div>
-        </footer>
       </main>
+
+      <footer class="footer" id="connect">
+        <p class="footer__label">Find me</p>
+        <nav class="links" id="social-links" aria-label="Social links"></nav>
+        <nav class="links links--quiet" id="meta-links" aria-label="Page links"></nav>
+        <p class="footer__updated" id="last-updated"></p>
+      </footer>
     </div>
+
+    <noscript>
+      <div class="shell noscript">
+        <h1>Dejan Dakic</h1>
+        <p>
+          The project list on this page is rendered with JavaScript. With it turned
+          off, here are the links that matter most:
+          <a href="https://x.com/DakicDejan">X</a>,
+          <a href="https://www.linkedin.com/in/dejandakic/">LinkedIn</a>,
+          <a href="https://github.com/kidemaestro">GitHub</a>,
+          <a href="https://stratatalent.com">StratA Talent</a>.
+        </p>
+      </div>
+    </noscript>
 
     <script src="data/site.js"></script>
     <script src="assets/script.js"></script>

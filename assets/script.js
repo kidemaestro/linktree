@@ -1,170 +1,108 @@
+/**
+ * Renders window.SiteConfig (data/site.js) into the skeleton in index.html.
+ * No framework, no build step — the only contract is the element ids below.
+ */
 (function renderSite() {
   const config = window.SiteConfig;
+  const app = document.getElementById("app");
 
   if (!config) {
-    document.getElementById("app").innerHTML =
-      '<p class="error">Site data could not be loaded.</p>';
+    app.innerHTML =
+      '<p class="error">Site data could not be loaded. Check that data/site.js is present.</p>';
     return;
   }
 
-  const STATUS_CLASS = {
-    Live: "status-live",
-    Published: "status-live",
-    Research: "status-research",
-    "In development": "status-progress",
-    "Shipping soon": "status-progress",
-    "Day-to-day": "status-neutral",
-    "On hold": "status-muted",
-    Polishing: "status-progress",
+  /** status text -> pill modifier. Unknown statuses fall back to neutral grey. */
+  const STATUS_TONE = {
+    Live: "live",
+    "Instagram only": "alt",
+    "In development": "building",
+    "Shipping soon": "building",
+    Research: "research",
+    "On hold": "paused",
   };
 
-  const UPCOMING_GROUPS = [
-    {
-      key: "shipping",
-      title: "Shipping next",
-      hint: "Launch-ready or very close to public.",
-    },
-    {
-      key: "building",
-      title: "Active development",
-      hint: "Building in private — follow on X for progress.",
-    },
-    {
-      key: "research",
-      title: "Research",
-      hint: "Data-driven experiments and prototypes.",
-    },
-    {
-      key: "company",
-      title: "Day job",
-      hint: "What I run full time alongside side projects.",
-    },
-    {
-      key: "backlog",
-      title: "On hold",
-      hint: "Paused for now — may return later.",
-    },
-  ];
-
-  const PAGE_NAV = [
-    { href: "#live-section", label: "Live" },
-    { href: "#next-section", label: "Next" },
-    { href: "#connect", label: "Connect" },
-  ];
-
-  const createElement = (tag, className, text) => {
-    const element = document.createElement(tag);
-    if (className) {
-      element.className = className;
-    }
-    if (text) {
-      element.textContent = text;
-    }
-    return element;
+  const el = (tag, className, text) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text) node.textContent = text;
+    return node;
   };
 
-  const createLink = (link, className = "text-link", options = {}) => {
-    const anchor = document.createElement("a");
-    anchor.className = className;
-    anchor.href = link.url;
-    anchor.textContent = link.label;
-    anchor.rel = "noopener noreferrer";
+  const isExternal = (url) => /^https?:/i.test(url);
 
-    if (!link.url.startsWith("mailto:") && !link.url.startsWith("#")) {
-      anchor.target = "_blank";
-      if (!className.includes("button") && !options.hideIcon) {
-        const icon = createElement("span", "text-link__icon", "↗");
-        icon.setAttribute("aria-hidden", "true");
-        anchor.append(icon);
-      }
-      anchor.setAttribute(
-        "aria-label",
-        options.ariaLabel || `${link.label} (opens in a new tab)`,
+  const anchor = (link, className, { label, stretch = false } = {}) => {
+    const node = el("a", className, label ?? link.label);
+    node.href = link.url;
+    if (isExternal(link.url)) {
+      node.target = "_blank";
+      node.rel = "noopener noreferrer";
+    }
+    if (stretch) node.classList.add("stretch");
+    return node;
+  };
+
+  const statusPill = (status) =>
+    el("span", `pill pill--${STATUS_TONE[status] || "neutral"}`, status);
+
+  /**
+   * Live product card. The whole card is one big tap target for the first link
+   * (`.stretch` covers the card via ::after); extra links sit above it.
+   */
+  const liveCard = (project, index) => {
+    const item = el("li", "card");
+    item.style.setProperty("--delay", `${Math.min(index, 8) * 60}ms`);
+
+    const [primary, ...extras] = project.links || [];
+    const head = el("div", "card__head");
+    const title = el("h3", "card__title");
+
+    if (primary) {
+      title.append(
+        anchor(primary, "card__link", { label: project.title, stretch: true }),
       );
+    } else {
+      title.textContent = project.title;
     }
 
-    return anchor;
-  };
+    head.append(title, statusPill(project.status));
+    item.append(head, el("p", "card__summary", project.summary || ""));
 
-  const formatUpdatedDate = (value) => {
-    const parsed = new Date(`${value}T00:00:00`);
-    if (Number.isNaN(parsed.getTime())) {
-      return value;
+    if (project.description) {
+      item.append(el("p", "card__description", project.description));
     }
 
-    return parsed.toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
-  };
-
-  const primaryLink = (project) =>
-    (project.links || []).find((link) =>
-      /open site|website|try now|instagram|performance|source/i.test(link.label),
-    ) || project.links?.[0];
-
-  const linkMetaLabel = (url, fallbackLabel) => {
-    try {
-      const host = new URL(url).hostname.replace(/^www\./, "");
-      return host;
-    } catch {
-      return fallbackLabel || url;
-    }
-  };
-
-  const createOverviewItem = (project, options = {}) => {
-    const item = createElement("li", "overview-list__item");
-    const link = primaryLink(project);
-
-    if (!link || options.titleOnly) {
-      item.textContent = project.title;
-      return item;
+    if (project.tags?.length) {
+      const tags = el("ul", "tags");
+      for (const tag of project.tags) tags.append(el("li", "tag", tag));
+      item.append(tags);
     }
 
-    if (options.titleOnlyWhenNoPublicLink && /updates on x/i.test(link.label)) {
-      item.textContent = project.title;
-      return item;
+    const foot = el("div", "card__foot");
+    if (primary) {
+      foot.append(el("span", "card__host", primary.label));
     }
+    for (const extra of extras) {
+      foot.append(anchor(extra, "chip"));
+    }
+    if (foot.childElementCount) item.append(foot);
 
-    const anchor = document.createElement("a");
-    anchor.className = "overview-link";
-    anchor.href = link.url;
-    anchor.rel = "noopener noreferrer";
-    anchor.target = "_blank";
-    anchor.setAttribute(
-      "aria-label",
-      `Open ${project.title} — ${linkMetaLabel(link.url, link.label)} (opens in a new tab)`,
-    );
-
-    anchor.append(
-      createElement("span", "overview-link__title", project.title),
-      createElement(
-        "span",
-        "overview-link__meta",
-        options.metaLabel || linkMetaLabel(link.url, link.label),
-      ),
-    );
-    item.append(anchor);
     return item;
   };
 
-  const createSocialOverviewItem = (link) => {
-    const item = createElement("li", "overview-list__item");
-    const anchor = document.createElement("a");
-    anchor.className = "overview-link";
-    anchor.href = link.url;
-    anchor.rel = "noopener noreferrer";
-    anchor.target = "_blank";
-    anchor.setAttribute(
-      "aria-label",
-      `${link.label} (opens in a new tab)`,
-    );
-    anchor.append(
-      createElement("span", "overview-link__title", link.label),
-      createElement("span", "overview-link__meta", linkMetaLabel(link.url, link.label)),
-    );
-    item.append(anchor);
+  /** In-progress row: title, status, one line. Deliberately not a big card. */
+  const queueRow = (project) => {
+    const item = el("li", "queue__item");
+    const head = el("div", "queue__head");
+    head.append(el("h3", "queue__title", project.title), statusPill(project.status));
+    item.append(head, el("p", "queue__summary", project.summary || ""));
+
+    if (project.links?.length) {
+      const links = el("div", "card__foot");
+      for (const link of project.links) links.append(anchor(link, "chip"));
+      item.append(links);
+    }
+
     return item;
   };
 
@@ -174,18 +112,16 @@
 
     if (!profile.avatarUrl) {
       avatar.textContent = profile.initials;
-      avatar.classList.remove("avatar--photo");
       return;
     }
 
     const image = document.createElement("img");
     image.className = "avatar__image";
     image.src = profile.avatarUrl;
-    image.alt = profile.name;
-    image.width = 80;
-    image.height = 80;
+    image.alt = "";
+    image.width = 96;
+    image.height = 96;
     image.decoding = "async";
-    image.loading = "eager";
     image.addEventListener("error", () => {
       avatar.classList.remove("avatar--photo");
       avatar.textContent = profile.initials;
@@ -195,211 +131,111 @@
     avatar.append(image);
   };
 
-  const renderProfile = () => {
+  const renderHero = () => {
     const { profile } = config;
 
     renderAvatar(profile);
     document.getElementById("profile-name").textContent = profile.name;
     document.getElementById("profile-role").textContent = profile.role || "";
-    document.getElementById("profile-tagline").textContent = profile.tagline;
+    document.getElementById("profile-tagline").textContent = profile.tagline || "";
 
-    document.getElementById("profile-handle").replaceChildren(
-      createLink(
-        {
-          label: profile.handle,
-          url: profile.handleUrl || profile.primaryCta.url,
-        },
-        "profile-handle-link",
-        { ariaLabel: `${profile.handle} on X (opens in a new tab)`, hideIcon: true },
+    document
+      .getElementById("profile-handle")
+      .replaceChildren(
+        anchor(
+          { label: profile.handle, url: profile.handleUrl || "https://x.com/" },
+          "hero__handle-link",
+        ),
+      );
+
+    document.getElementById("profile-actions").replaceChildren(
+      ...(profile.actions || []).map((action, index) =>
+        anchor(action, index === 0 ? "button button--primary" : "button"),
       ),
     );
 
-    document.getElementById("hero-actions").replaceChildren(
-      createLink(profile.primaryCta, "button button-primary", {
-        ariaLabel: `${profile.primaryCta.label} (opens in a new tab)`,
-      }),
-      createLink(profile.secondaryCta, "button button-secondary", {
-        ariaLabel: `${profile.secondaryCta.label} (opens in a new tab)`,
-      }),
-    );
+    const note = document.getElementById("profile-note");
+    note.textContent = profile.note || "";
+    note.hidden = !profile.note;
+  };
 
-    const liveCount = config.sections.published.length;
-    const upcomingCount = config.sections.upcoming.length;
-    const shippingCount = config.sections.upcoming.filter(
-      (project) => project.group === "shipping",
-    ).length;
+  const renderLive = () => {
+    document.getElementById("live-count").textContent = String(config.live.length);
+    document
+      .getElementById("live-list")
+      .replaceChildren(...config.live.map(liveCard));
+  };
 
-    const stats = document.getElementById("hero-stats");
-    stats.replaceChildren(
-      createElement("li", "hero-stat hero-stat--live", ""),
-      createElement("li", "hero-stat hero-stat--next", ""),
-      createElement("li", "hero-stat hero-stat--total", ""),
-    );
-    stats.children[0].innerHTML = `<strong>${liveCount}</strong> live`;
-    stats.children[1].innerHTML = `<strong>${shippingCount || upcomingCount}</strong> upcoming`;
-    stats.children[2].innerHTML = `<strong>${liveCount + upcomingCount}</strong> total tracked`;
+  const renderNext = () => {
+    const section = document.getElementById("next");
+    const items = config.next || [];
 
-    document.getElementById("page-nav").replaceChildren(
-      ...PAGE_NAV.map((item) => {
-        const link = createElement("a", "page-nav__link", item.label);
-        link.href = item.href;
-        return link;
-      }),
-    );
+    if (!items.length) {
+      section.hidden = true;
+      return;
+    }
 
-    const changelog = document.getElementById("profile-changelog");
-    if (profile.changelog) {
-      changelog.textContent = profile.changelog;
-      changelog.hidden = false;
+    document.getElementById("next-count").textContent = String(items.length);
+    document.getElementById("next-list").replaceChildren(...items.map(queueRow));
+
+    const note = document.getElementById("next-note");
+    if (config.nextNote) {
+      note.replaceChildren(anchor(config.nextNote, "chip chip--note"));
     } else {
-      changelog.textContent = "";
-      changelog.hidden = true;
+      note.replaceChildren();
     }
   };
 
-  const renderOverview = () => {
-    const grid = document.getElementById("overview-grid");
-    const liveColumn = createElement("div", "overview-column");
-    const nextColumn = createElement("div", "overview-column");
-    const connectColumn = createElement("div", "overview-column");
+  const renderWork = () => {
+    const section = document.getElementById("work");
+    const { work } = config;
 
-    liveColumn.append(
-      createElement("h3", "overview-title", "Try now"),
-      createElement("p", "overview-hint", "Open a live product in one click."),
-    );
-    const liveList = createElement("ul", "overview-list");
-    for (const project of config.sections.published) {
-      liveList.append(createOverviewItem(project));
-    }
-    liveColumn.append(liveList);
-
-    nextColumn.append(
-      createElement("h3", "overview-title", "Coming up"),
-      createElement("p", "overview-hint", "What I am shipping or building next."),
-    );
-    const nextList = createElement("ul", "overview-list");
-    for (const project of config.sections.upcoming.filter((entry) =>
-      ["building", "research"].includes(entry.group),
-    )) {
-      nextList.append(
-        createOverviewItem(project, {
-          titleOnlyWhenNoPublicLink: true,
-          metaLabel:
-            project.links?.[0]?.label === "Source"
-              ? "GitHub"
-              : linkMetaLabel(project.links?.[0]?.url || "", project.links?.[0]?.label),
-        }),
-      );
-    }
-    nextColumn.append(nextList);
-
-    connectColumn.append(
-      createElement("h3", "overview-title", "Follow along"),
-      createElement("p", "overview-hint", "Best place for build updates."),
-    );
-    const connectList = createElement("ul", "overview-list");
-    for (const link of config.socialLinks) {
-      connectList.append(createSocialOverviewItem(link));
-    }
-    connectColumn.append(connectList);
-
-    grid.replaceChildren(liveColumn, nextColumn, connectColumn);
-  };
-
-  const renderProjectCard = (project, index = 0) => {
-    const card = createElement("article", "project-card");
-    card.dataset.stage = project.group || "live";
-    card.style.setProperty("--card-delay", `${Math.min(index, 6) * 45}ms`);
-
-    const header = createElement("div", "project-card-header");
-    const titleRow = createElement("div", "project-card-title-row");
-    const title = createElement("h3", "project-card__title", project.title);
-    const status = createElement(
-      "span",
-      `status-pill ${STATUS_CLASS[project.status] || "status-neutral"}`,
-      project.status,
-    );
-    const summary = createElement("p", "project-summary", project.summary || "");
-    const description = createElement("p", "project-description", project.description);
-    const tags = createElement("div", "tag-list");
-    const links = createElement("div", "project-links");
-
-    titleRow.append(title, status);
-    header.append(titleRow, summary);
-
-    for (const tag of project.tags || []) {
-      tags.append(createElement("span", "tag", tag));
+    if (!work) {
+      section.hidden = true;
+      return;
     }
 
-    for (const [linkIndex, link] of (project.links || []).entries()) {
-      const className =
-        linkIndex === 0 ? "text-link text-link--primary" : "text-link";
-      links.append(createLink(link, className));
+    const card = document.getElementById("work-card");
+    card.replaceChildren(el("h3", "card__title", work.title));
+
+    if (work.role) card.append(el("p", "work__role", work.role));
+    card.append(el("p", "card__description", work.summary || ""));
+
+    if (work.link) {
+      const foot = el("div", "card__foot");
+      foot.append(anchor(work.link, "chip"));
+      card.append(foot);
     }
-
-    card.append(header, description, tags, links);
-    return card;
-  };
-
-  const renderLiveSection = () => {
-    const container = document.getElementById("published-projects");
-    container.replaceChildren(
-      ...config.sections.published.map((project, index) =>
-        renderProjectCard(project, index),
-      ),
-    );
-  };
-
-  const renderUpcomingSection = () => {
-    const container = document.getElementById("upcoming-groups");
-    const groups = [];
-
-    for (const group of UPCOMING_GROUPS) {
-      const projects = config.sections.upcoming.filter(
-        (project) => project.group === group.key,
-      );
-      if (projects.length === 0) {
-        continue;
-      }
-
-      const wrapper = createElement("section", "project-group");
-      wrapper.setAttribute("aria-labelledby", `group-${group.key}`);
-
-      const groupHeader = createElement("div", "project-group-header");
-      groupHeader.append(
-        createElement("h3", "project-group-title", group.title),
-        createElement("p", "project-group-hint", group.hint),
-      );
-      groupHeader.querySelector(".project-group-title").id = `group-${group.key}`;
-
-      const grid = createElement("div", "project-grid");
-      grid.replaceChildren(
-        ...projects.map((project, index) => renderProjectCard(project, index)),
-      );
-
-      wrapper.append(groupHeader, grid);
-      groups.push(wrapper);
-    }
-
-    container.replaceChildren(...groups);
   };
 
   const renderFooter = () => {
-    document.getElementById("social-links").replaceChildren(
-      ...config.socialLinks.map((link) => createLink(link, "social-link")),
-    );
+    document
+      .getElementById("social-links")
+      .replaceChildren(...config.socialLinks.map((link) => anchor(link, "chip")));
 
-    document.getElementById("meta-links").replaceChildren(
-      ...(config.metaLinks || []).map((link) => createLink(link, "meta-link")),
-    );
+    document
+      .getElementById("meta-links")
+      .replaceChildren(
+        ...(config.metaLinks || []).map((link) => anchor(link, "chip chip--quiet")),
+      );
 
-    document.getElementById("last-updated").textContent =
-      `Last updated ${formatUpdatedDate(config.lastUpdated)}`;
+    const updated = new Date(`${config.lastUpdated}T00:00:00`);
+    document.getElementById("last-updated").textContent = Number.isNaN(
+      updated.getTime(),
+    )
+      ? `Last updated ${config.lastUpdated}`
+      : `Last updated ${updated.toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })}`;
   };
 
-  renderProfile();
-  renderOverview();
-  renderLiveSection();
-  renderUpcomingSection();
+  renderHero();
+  renderLive();
+  renderNext();
+  renderWork();
   renderFooter();
+
+  app.dataset.rendered = "true";
 })();

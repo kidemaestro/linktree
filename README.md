@@ -2,34 +2,94 @@
 
 **Live site:** https://kidemaestro.github.io/linktree/
 
-A small, dependency-free project hub for your X bio. It is designed to run forever on GitHub Pages without a build step.
+A small, dependency-free project hub for an X bio. No build step, no framework —
+GitHub Pages serves the files as they are.
 
-If you rename the GitHub repo or use a custom domain, update the canonical and Open Graph URLs in `index.html` so social cards keep working.
+The page is one column, in the order a visitor cares about:
+
+| Section         | What goes there                                              |
+| --------------- | ------------------------------------------------------------ |
+| **Hero**        | Who you are, one line, and the two links you most want tapped |
+| **Live now**    | Products anyone can open today — the whole card is tappable   |
+| **In progress** | Not public yet: title, status, one line each                  |
+| **Day job**     | The thing that pays the bills, kept out of the roadmap        |
+| **Find me**     | Social links and the page source                              |
 
 ## Update Your Content
 
-Edit `data/site.js` to change:
+Everything on the page comes from **`data/site.js`**. Nothing else needs editing.
 
-- Profile name, handle, initials, tagline, changelog, and CTA links
-- Published projects that people can try now
-- Upcoming projects grouped by stage (`shipping`, `building`, `research`, `company`, `backlog`)
-- Social links and the `lastUpdated` date
+```js
+window.SiteConfig = {
+  profile: { name, handle, handleUrl, initials, avatarUrl, role, tagline, note, actions },
+  live: [ /* products people can open now */ ],
+  next: [ /* not public yet */ ],
+  nextNote: { label, url },
+  work: { title, role, summary, link },
+  socialLinks: [ { label, url } ],
+  metaLinks: [ { label, url } ],
+  lastUpdated: "YYYY-MM-DD",
+};
+```
 
-Keep summaries short and pull copy from the live product pages when those change. Prefer public product/community links over private GitHub repos.
+### `live[]` — a product card
 
-Each project supports:
+```js
+{
+  title: "BountyRaiders",
+  status: "Live",
+  summary: "One line. This is the hook people actually read.",
+  description: "Two sentences of detail for anyone still reading.",
+  tags: ["Next.js", "Stripe"],
+  links: [
+    { label: "bountyraiders.com", url: "https://www.bountyraiders.com" },
+    { label: "Discord", url: "https://discord.gg/..." },
+  ],
+}
+```
 
-- `title`
-- `summary` (one-line hook shown on the card)
-- `status`
-- `description`
-- `tags`
-- `links`
-- `group` (for upcoming projects only)
+**The first link is the card's main destination** — the whole card opens it, so put
+the product URL first and use the domain as its label. Any further links render as
+small chips next to it.
+
+### `next[]` — an in-progress row
+
+Keep these to `title`, `status`, and a one-line `summary`. They are deliberately
+plain rows, not cards: nothing is public yet, so there is nothing to click.
+`nextNote` renders once at the bottom of the section — that is where the "follow
+along on X" link lives, instead of repeating the same button on every row.
+
+### Statuses
+
+`status` picks the coloured pill. Known values:
+
+| Status            | Pill              |
+| ----------------- | ----------------- |
+| `Live`            | green, pulsing dot |
+| `Instagram only`  | amber — reachable, but not the usual way |
+| `In development`  | blue              |
+| `Shipping soon`   | blue              |
+| `Research`        | violet            |
+| `On hold`         | grey              |
+
+Anything else renders neutral grey. To add a status, add it to `STATUS_TONE` in
+`assets/script.js` and give it a `.pill--<tone>` rule in `assets/styles.css`.
+
+### Other notes
+
+- `profile.actions` — the first is the filled button, the rest are outlined.
+- `profile.note` — optional announcement line under the buttons. Leave it `""` to
+  hide it. Don't restate a project's status there; the cards already show it.
+- `work` — omit the key entirely and the Day job section hides itself.
+- The `<noscript>` block in `index.html` holds a few permanent profile links for
+  visitors with JavaScript off. It deliberately does **not** mirror the project
+  lists, so there is nothing to keep in sync.
+- Prefer public product/community links over private GitHub repos, and bump
+  `lastUpdated` when you change anything.
 
 ## Preview Locally
 
-From the project folder, run:
+From the project folder:
 
 ```powershell
 python -m http.server 8000
@@ -37,21 +97,22 @@ python -m http.server 8000
 
 Then open `http://localhost:8000`.
 
-You can also run the no-dependency validation script:
+Validate the site with the no-dependency check script:
 
 ```powershell
 node scripts/test-static-site.mjs
 ```
 
+It verifies that every id the renderer writes to exists in `index.html`, that every
+link has a label and a real URL, that each live product has a destination, and that
+every status used has a matching pill.
+
 ## Deploy On GitHub Pages
 
-1. Create a new GitHub repository named `linktree`.
-2. Push this project to the repository.
-3. In GitHub, open the repository settings.
-4. Go to **Pages**.
-5. Set **Source** to **Deploy from a branch**.
-6. Select the `main` branch and the `/root` folder.
-7. Save.
+1. Push this project to a GitHub repository named `linktree`.
+2. In the repository settings, open **Pages**.
+3. Set **Source** to **Deploy from a branch**.
+4. Select the `main` branch and the `/root` folder, then save.
 
 Your page will be available at:
 
@@ -59,16 +120,6 @@ Your page will be available at:
 https://<github-username>.github.io/linktree/
 ```
 
-Use that URL in your X bio.
-
-## Suggested Git Commands
-
-```powershell
-git branch -M main
-git add .
-git commit -m "Create static project hub"
-git remote add origin https://github.com/<github-username>/linktree.git
-git push -u origin main
-```
-
-Replace `<github-username>` with your GitHub username before running the remote command.
+Use that URL in your X bio. If you rename the repo or move to a custom domain,
+update the canonical and Open Graph URLs in `index.html` so social cards keep
+working.
