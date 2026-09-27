@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cover: BetWithBat</title>
+    <link rel="stylesheet" href="art.css">
+    <style>
+      .canvas {
+        width: 960px;
+        height: 600px;
+        background:
+          radial-gradient(520px 340px at 50% 36%, rgba(43, 222, 150, 0.22), transparent 70%),
+          radial-gradient(380px 300px at 6% -8%, rgba(214, 255, 236, 0.28), transparent 70%),
+          radial-gradient(380px 300px at 94% -8%, rgba(214, 255, 236, 0.28), transparent 70%),
+          linear-gradient(180deg, #0a1411 0%, #0b0f14 58%, #07100c 100%);
+      }
+
+      .pitch {
+        position: absolute;
+        inset: 0;
+      }
+
+      .badge {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: grid;
+        width: 300px;
+        height: 284px;
+        place-items: center;
+        border-radius: 44px;
+        background: #fff;
+        transform: translate(-50%, -54%) rotate(-2deg);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.4),
+          0 0 0 10px rgba(43, 222, 150, 0.14),
+          0 40px 90px -20px rgba(0, 0, 0, 0.85),
+          0 0 120px rgba(43, 222, 150, 0.35);
+      }
+
+      .badge img {
+        width: 246px;
+        height: auto;
+      }
+
+      .beam {
+        position: absolute;
+        top: -40px;
+        width: 180px;
+        height: 520px;
+        background: linear-gradient(180deg, rgba(214, 255, 236, 0.16), transparent 80%);
+        filter: blur(18px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas" id="art">
+      <div class="beam" style="left: 40px; transform: rotate(-24deg);"></div>
+      <div class="beam" style="right: 40px; transform: rotate(24deg);"></div>
+
+      <svg class="pitch" viewBox="0 0 960 600" aria-hidden="true">
+        <defs>
+          <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+            <stop offset="0.45" stop-color="#fff" stop-opacity="0.16"/>
+            <stop offset="1" stop-color="#fff" stop-opacity="0.3"/>
+          </linearGradient>
+          <linearGradient id="stripe" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2bde96" stop-opacity="0"/>
+            <stop offset="1" stop-color="#2bde96" stop-opacity="0.07"/>
+          </linearGradient>
+        </defs>
+        <!-- mown stripes, converging on a vanishing point above the frame -->
+        <g fill="url(#stripe)">
+          <polygon points="480,150 -380,600 -160,600"/>
+          <polygon points="480,150 60,600 280,600"/>
+          <polygon points="480,150 500,600 720,600"/>
+          <polygon points="480,150 940,600 1160,600"/>
+        </g>
+        <g fill="none" stroke="url(#fade)" stroke-width="3">
+          <!-- touchlines -->
+          <line x1="300" y1="250" x2="-120" y2="640"/>
+          <line x1="660" y1="250" x2="1080" y2="640"/>
+          <!-- halfway line and centre circle -->
+          <line x1="140" y1="420" x2="820" y2="420"/>
+          <ellipse cx="480" cy="420" rx="150" ry="42"/>
+          <ellipse cx="480" cy="420" rx="5" ry="2" fill="#fff" fill-opacity="0.3"/>
+          <!-- far box -->
+          <polyline points="398,250 386,282 574,282 562,250"/>
+        </g>
+      </svg>
+
+      <div class="badge"><img src="betwithbat-logo.png" alt=""></div>
+    </div>
+  </body>
+</html>

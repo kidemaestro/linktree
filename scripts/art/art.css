@@ -1,0 +1,65 @@
+/* Shared by the art templates in this folder. render-art.mjs screenshots each one. */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../../assets/fonts/fraunces.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../../assets/fonts/fraunces-italic.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../../assets/fonts/inter.woff2") format("woff2");
+  font-weight: 400 700;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../assets/fonts/jetbrains-mono.woff2") format("woff2");
+  font-weight: 400 600;
+}
+
+:root {
+  --ink: #06080f;
+  --fg: #eef1f7;
+  --muted: #98a2b8;
+  --gold: #e2b857;
+  --night: #9db7ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink);
+  color: var(--fg);
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.canvas {
+  position: relative;
+  overflow: hidden;
+}
+
+.mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.serif {
+  font-family: "Fraunces", Georgia, serif;
+  font-optical-sizing: auto;
+}

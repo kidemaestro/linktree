@@ -2,82 +2,172 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Dejan Dakic — live AI and web products, what is in progress, and StratA Talent executive search.">
-    <meta property="og:title" content="Dejan Dakic — projects">
-    <meta property="og:description" content="BountyRaiders, useToolCraft, BetWithBat, GlitzGlow — and what is being built next.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kidemaestro.github.io/linktree/">
-    <meta property="og:image" content="https://kidemaestro.github.io/linktree/assets/social-card.svg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Dejan Dakic — projects">
-    <meta name="twitter:description" content="BountyRaiders, useToolCraft, BetWithBat, GlitzGlow — and what is being built next.">
-    <meta name="theme-color" content="#070b14">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Dejan Dakic: private bankers by day, AI apps by night</title>
+    <meta name="description" content="Placing elite private bankers by day, building AI apps by night. Lanes.news, BountyRaiders, useToolCraft and BetWithBat, plus StratA Talent executive search.">
     <link rel="canonical" href="https://kidemaestro.github.io/linktree/">
-    <title>Dejan Dakic — projects</title>
+
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Dejan Dakic">
+    <meta property="og:title" content="Dejan Dakic: private bankers by day, AI apps by night">
+    <meta property="og:description" content="New: Lanes.news, every side of the story in its own lane. Plus BountyRaiders, useToolCraft and BetWithBat.">
+    <meta property="og:url" content="https://kidemaestro.github.io/linktree/">
+    <meta property="og:image" content="https://kidemaestro.github.io/linktree/assets/social-card.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Dejan Dakic: placing elite private bankers by day, building AI apps by night. New: Lanes.news.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@DakicDejan">
+    <meta name="twitter:title" content="Dejan Dakic: private bankers by day, AI apps by night">
+    <meta name="twitter:description" content="New: Lanes.news, every side of the story in its own lane. Plus BountyRaiders, useToolCraft and BetWithBat.">
+    <meta name="twitter:image" content="https://kidemaestro.github.io/linktree/assets/social-card.jpg">
+    <meta name="twitter:image:alt" content="Dejan Dakic: placing elite private bankers by day, building AI apps by night. New: Lanes.news.">
+
+    <meta name="theme-color" content="#06080f">
+    <meta name="color-scheme" content="dark">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="preload" as="image" href="assets/profile.jpg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+    <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/profile.jpg" as="image">
     <link rel="stylesheet" href="assets/styles.css">
+    <noscript><style>.app, .topbar { display: none; }</style></noscript>
   </head>
   <body>
-    <a class="skip-link" href="#live">Skip to live products</a>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <div id="app" class="shell">
-      <header class="hero">
-        <div class="avatar" id="profile-avatar" aria-hidden="true"></div>
-        <h1 id="profile-name"></h1>
-        <p class="hero__handle" id="profile-handle"></p>
-        <p class="hero__role" id="profile-role"></p>
-        <p class="hero__tagline" id="profile-tagline"></p>
-        <div class="hero__actions" id="profile-actions"></div>
-        <p class="hero__note" id="profile-note" hidden></p>
-      </header>
+    <header class="topbar" id="topbar">
+      <div class="topbar__inner">
+        <a class="brand" href="#top" aria-label="Back to top">
+          <img class="brand__mark" src="assets/favicon.svg" alt="" width="28" height="28">
+          <span class="brand__name" id="brand-name">Dejan Dakic</span>
+        </a>
+        <nav class="topnav" aria-label="Sections">
+          <a href="#lanes">Lanes</a>
+          <a href="#live">Products</a>
+          <a href="#lab">Lab</a>
+          <a href="#work">By day</a>
+        </nav>
+        <span id="topbar-action"></span>
+      </div>
+    </header>
 
-      <main>
-        <section class="section" id="live" aria-labelledby="live-heading">
-          <div class="section__head">
-            <h2 id="live-heading">Live now</h2>
-            <span class="count" id="live-count"></span>
+    <div id="app" class="app">
+      <section class="hero" id="top" aria-labelledby="profile-name">
+        <div class="hero__sky" aria-hidden="true"></div>
+        <div class="hero__inner">
+          <div class="hero__text">
+            <a class="announcement" id="announcement" href="#lanes" hidden></a>
+            <h1 id="profile-name">Dejan Dakic</h1>
+            <p class="hero__handle" id="profile-handle"></p>
+            <p class="hero__headline" id="profile-headline"></p>
+            <p class="hero__intro" id="profile-intro"></p>
+            <div class="hero__actions" id="profile-actions"></div>
           </div>
-          <p class="section__lede">Open and use these today.</p>
-          <ul class="cards" id="live-list"></ul>
+          <div class="hero__portrait">
+            <div class="avatar" id="profile-avatar"></div>
+            <a class="orbit orbit--day" href="#work" tabindex="-1" aria-hidden="true">
+              <span class="orbit__dot"></span>By day · <b id="orbit-day"></b>
+            </a>
+            <a class="orbit orbit--night" href="#lanes" tabindex="-1" aria-hidden="true">
+              <span class="orbit__dot"></span>By night · <b id="orbit-night"></b>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <main id="main" tabindex="-1">
+        <section class="feature" id="lanes" aria-labelledby="feature-title">
+          <div class="feature__glow" aria-hidden="true"></div>
+          <div class="feature__head">
+            <p class="eyebrow eyebrow--gold" id="feature-eyebrow"></p>
+            <div class="feature__title-row">
+              <img class="feature__logo" id="feature-logo" src="assets/img/lanes-mark.svg" alt="" width="52" height="52">
+              <h2 id="feature-title">Latest launch</h2>
+              <span id="feature-status"></span>
+            </div>
+            <p class="feature__tagline" id="feature-tagline"></p>
+            <p class="feature__description" id="feature-description"></p>
+          </div>
+          <div class="feature__facts">
+            <dl class="stats" id="feature-stats"></dl>
+            <p class="feature__promise" id="feature-promise"></p>
+            <div class="feature__actions" id="feature-links"></div>
+          </div>
+          <div class="player" id="feature-player"></div>
+          <div class="feature__topics">
+            <p class="label" id="feature-topics-label"></p>
+            <ul class="topics" id="feature-topics"></ul>
+          </div>
         </section>
 
-        <section class="section" id="next" aria-labelledby="next-heading">
+        <section class="section" id="live" aria-labelledby="live-heading">
           <div class="section__head">
-            <h2 id="next-heading">In progress</h2>
-            <span class="count" id="next-count"></span>
+            <p class="eyebrow eyebrow--night">By night</p>
+            <h2 id="live-heading">Also live <span class="count" id="live-count"></span></h2>
+            <p class="section__lede">Open and use these today.</p>
           </div>
-          <p class="section__lede">Not public yet — here so you know what is coming.</p>
-          <ul class="queue" id="next-list"></ul>
+          <ul class="products" id="live-list"></ul>
+        </section>
+
+        <section class="section" id="lab" aria-labelledby="lab-heading">
+          <div class="section__head">
+            <p class="eyebrow eyebrow--night">By night</p>
+            <h2 id="lab-heading">In the lab <span class="count" id="next-count"></span></h2>
+            <p class="section__lede">Not public yet. Here so you know what is coming.</p>
+          </div>
+          <ul class="lab" id="next-list"></ul>
           <p class="section__note" id="next-note"></p>
         </section>
 
-        <section class="section" id="work" aria-labelledby="work-heading">
-          <div class="section__head">
-            <h2 id="work-heading">Day job</h2>
+        <section class="day" id="work" aria-labelledby="work-title">
+          <div class="day__card">
+            <div class="day__sun" aria-hidden="true"></div>
+            <div class="day__main">
+              <p class="eyebrow eyebrow--day" id="work-eyebrow"></p>
+              <h2 id="work-title">By day</h2>
+              <p class="day__role" id="work-role"></p>
+              <p class="day__summary" id="work-summary"></p>
+            </div>
+            <div class="day__aside">
+              <ul class="day__places" id="work-places"></ul>
+              <div class="day__actions" id="work-links"></div>
+            </div>
           </div>
-          <div class="work" id="work-card"></div>
+        </section>
+
+        <section class="section section--quiet" id="archive" aria-labelledby="archive-heading">
+          <div class="section__head">
+            <p class="eyebrow">Archive</p>
+            <h2 id="archive-heading">Shipped, then retired</h2>
+          </div>
+          <ul class="archive" id="archive-list"></ul>
         </section>
       </main>
 
       <footer class="footer" id="connect">
-        <p class="footer__label">Find me</p>
-        <nav class="links" id="social-links" aria-label="Social links"></nav>
-        <nav class="links links--quiet" id="meta-links" aria-label="Page links"></nav>
-        <p class="footer__updated" id="last-updated"></p>
+        <div class="closing">
+          <h2 id="closing-title">Find me</h2>
+          <p class="closing__text" id="closing-text"></p>
+          <nav class="links" id="social-links" aria-label="Social links"></nav>
+        </div>
+        <div class="footer__meta">
+          <nav class="links links--quiet" id="meta-links" aria-label="Page links"></nav>
+          <p class="footer__updated" id="last-updated"></p>
+        </div>
       </footer>
     </div>
 
     <noscript>
-      <div class="shell noscript">
+      <div class="noscript">
         <h1>Dejan Dakic</h1>
+        <p>Placing elite private bankers by day, building AI apps by night.</p>
         <p>
-          The project list on this page is rendered with JavaScript. With it turned
-          off, here are the links that matter most:
+          The project list on this page is rendered with JavaScript. With it turned off,
+          here are the links that matter most:
+          <a href="https://lanes.news">Lanes.news</a>,
           <a href="https://x.com/DakicDejan">X</a>,
           <a href="https://www.linkedin.com/in/dejandakic/">LinkedIn</a>,
           <a href="https://github.com/kidemaestro">GitHub</a>,

@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cover: useToolCraft</title>
+    <link rel="stylesheet" href="art.css">
+    <style>
+      .canvas {
+        width: 960px;
+        height: 600px;
+        background:
+          radial-gradient(560px 380px at 78% 18%, rgba(167, 139, 250, 0.28), transparent 70%),
+          radial-gradient(520px 360px at 8% 110%, rgba(94, 234, 212, 0.12), transparent 70%),
+          #0a0b16;
+      }
+
+      /* blueprint grid */
+      .grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(167, 139, 250, 0.09) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(167, 139, 250, 0.09) 1px, transparent 1px);
+        background-size: 40px 40px;
+        mask-image: radial-gradient(700px 480px at 60% 40%, #000 30%, transparent 80%);
+      }
+
+      .wordmark {
+        position: absolute;
+        top: 52px;
+        left: 64px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 30px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .wordmark span {
+        color: #c4b5fd;
+      }
+
+      .panel {
+        position: absolute;
+        top: 132px;
+        left: 64px;
+        width: 700px;
+        padding: 26px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 26px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+        box-shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        transform: perspective(1400px) rotateY(-9deg) rotateX(4deg);
+        transform-origin: left center;
+      }
+
+      .search {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        height: 64px;
+        padding: 0 20px;
+        border: 1px solid rgba(196, 181, 253, 0.5);
+        border-radius: 16px;
+        color: #cfd5e6;
+        font-size: 21px;
+        background: rgba(8, 9, 20, 0.7);
+        box-shadow: 0 0 0 6px rgba(167, 139, 250, 0.12);
+      }
+
+      .caret {
+        width: 2px;
+        height: 26px;
+        margin-left: -8px;
+        background: #c4b5fd;
+      }
+
+      .go {
+        margin-left: auto;
+        padding: 10px 16px;
+        border-radius: 11px;
+        color: #0a0b16;
+        font-size: 16px;
+        font-weight: 700;
+        background: #c4b5fd;
+      }
+
+      .rows {
+        display: grid;
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 52px 1fr 150px;
+        align-items: center;
+        gap: 18px;
+        padding: 14px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .row:first-child {
+        border-color: rgba(196, 181, 253, 0.45);
+        background: rgba(167, 139, 250, 0.1);
+      }
+
+      .tile {
+        display: grid;
+        width: 52px;
+        height: 52px;
+        place-items: center;
+        border-radius: 14px;
+      }
+
+      .lines {
+        display: grid;
+        gap: 9px;
+      }
+
+      .line {
+        height: 12px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.22);
+      }
+
+      .line.sub {
+        height: 9px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .meter {
+        display: flex;
+        gap: 5px;
+      }
+
+      .meter i {
+        flex: 1;
+        height: 10px;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .meter i.on {
+        background: #c4b5fd;
+      }
+
+      .stamp {
+        position: absolute;
+        right: 58px;
+        bottom: 60px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 20px;
+        border: 1px solid rgba(94, 234, 212, 0.4);
+        border-radius: 999px;
+        color: #99f6e4;
+        font-size: 17px;
+        background: rgba(6, 30, 28, 0.8);
+        box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.9);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas" id="art">
+      <div class="grid"></div>
+
+      <div class="wordmark">
+        <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="1" y="1" width="38" height="38" rx="11" fill="none" stroke="#c4b5fd" stroke-width="2"/>
+          <rect x="9" y="9" width="9" height="9" rx="2.5" fill="#c4b5fd"/>
+          <rect x="22" y="9" width="9" height="9" rx="2.5" fill="#c4b5fd" fill-opacity=".45"/>
+          <rect x="9" y="22" width="9" height="9" rx="2.5" fill="#c4b5fd" fill-opacity=".45"/>
+          <rect x="22" y="22" width="9" height="9" rx="2.5" fill="#99f6e4"/>
+        </svg>
+        <div>use<span>Tool</span>Craft</div>
+      </div>
+
+      <div class="panel">
+        <div class="search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+          <span>Describe your workflow</span><span class="caret"></span>
+          <span class="go">Find tools</span>
+        </div>
+
+        <div class="rows">
+          <div class="row">
+            <div class="tile" style="background: rgba(167,139,250,.25)">
+              <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="9" fill="none" stroke="#e9e4ff" stroke-width="3"/><circle cx="13" cy="13" r="3" fill="#e9e4ff"/></svg>
+            </div>
+            <div class="lines"><div class="line" style="width: 62%"></div><div class="line sub" style="width: 88%"></div></div>
+            <div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+          </div>
+          <div class="row">
+            <div class="tile" style="background: rgba(94,234,212,.18)">
+              <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 19 13 5l8 14z" fill="none" stroke="#ccfbf1" stroke-width="3" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="lines"><div class="line" style="width: 48%"></div><div class="line sub" style="width: 76%"></div></div>
+            <div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+          </div>
+          <div class="row">
+            <div class="tile" style="background: rgba(251,191,36,.16)">
+              <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="5" y="5" width="16" height="16" rx="4" fill="none" stroke="#fde68a" stroke-width="3"/></svg>
+            </div>
+            <div class="lines"><div class="line" style="width: 55%"></div><div class="line sub" style="width: 70%"></div></div>
+            <div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stamp mono">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>
+        Shortlist ready
+      </div>
+    </div>
+  </body>
+</html>
